@@ -1,7 +1,10 @@
 package com.parniyan.kittylogger
 import com.parniyan.kittylogger.data.model.KittyLog
 import com.parniyan.kittylogger.data.model.LogType
-import org.eclipse.paho.client.mqttv3.*
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient
+import org.eclipse.paho.client.mqttv3.MqttCallback
+import org.eclipse.paho.client.mqttv3.MqttMessage
 
 
 /**
@@ -10,17 +13,19 @@ import org.eclipse.paho.client.mqttv3.*
  */
 
 
+
+
 class KittyMqttInterceptor(
-    private val mqttClient: IMqttClient,
+    private val mqttClient: MqttAsyncClient,
     private val logger: KittyLogger = ConsoleLogger()
-) : IMqttClient by mqttClient, MqttCallback {
+) : MqttCallback {
 
     init {
         // Set the callback on the MQTT client
         mqttClient.setCallback(this)
     }
 
-    override fun publish(topic: String, payload: ByteArray, qos: Int, retained: Boolean) {
+    fun publish(topic: String, payload: ByteArray, qos: Int, retained: Boolean) {
         val log = KittyLog(
             timestamp = System.currentTimeMillis(),
             event = "Outgoing Topic: $topic, Payload: ${String(payload)}, QoS: $qos, Retained: $retained",
@@ -28,6 +33,7 @@ class KittyMqttInterceptor(
         )
         LogManager.addLog(log)
         logger.logEvent(log.event)
+
         mqttClient.publish(topic, payload, qos, retained)
     }
 
@@ -47,7 +53,7 @@ class KittyMqttInterceptor(
         val log = KittyLog(
             timestamp = System.currentTimeMillis(),
             event = "Connection Lost: ${cause.message}",
-            type = LogType.INCOMING
+            type = LogType.CONNECTION_LOST
         )
         LogManager.addLog(log)
         logger.logEvent(log.event)
@@ -58,7 +64,7 @@ class KittyMqttInterceptor(
         val log = KittyLog(
             timestamp = System.currentTimeMillis(),
             event = "Delivery Complete: ${token.messageId}",
-            type = LogType.OUTGOING
+            type = LogType.DELIVERY_COMPLETE
         )
         LogManager.addLog(log)
         logger.logEvent(log.event)

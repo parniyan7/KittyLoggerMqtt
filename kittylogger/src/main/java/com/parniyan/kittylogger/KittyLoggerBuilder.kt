@@ -1,6 +1,6 @@
 package com.parniyan.kittylogger
 
-import org.eclipse.paho.client.mqttv3.IMqttClient
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient
 
 
 /**
@@ -16,7 +16,7 @@ class KittyLoggerBuilder {
         return this
     }
 
-    fun build(mqttClient: IMqttClient): KittyMqttInterceptor {
+    fun build(mqttClient: MqttAsyncClient): KittyMqttInterceptor {
         return KittyMqttInterceptor(mqttClient, logger)
     }
 }

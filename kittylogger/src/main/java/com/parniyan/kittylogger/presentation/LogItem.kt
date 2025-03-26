@@ -3,9 +3,7 @@ package com.parniyan.kittylogger.presentation
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,30 +20,25 @@ import java.util.Locale
 
 @Composable
 fun LogItem(log: KittyLog) {
-    val backgroundColor = when (log.type) {
+    /*val backgroundColor = when (log.type) {
         LogType.INCOMING -> Color.YELLOW
         LogType.OUTGOING -> Color.YELLOW
         LogType.CONNECTION_LOST -> Color.RED
         LogType.DELIVERY_COMPLETE -> Color.GREEN
+    }*/
+    Column {
     }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
+   /* Column(
+        modifier = Modifier.padding(16.dp)
     ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = log.event)
-            Text(
-                text = "Timestamp: ${
-                    SimpleDateFormat(
-                        "HH:mm:ss",
-                        Locale.getDefault()
-                    ).format(log.timestamp)
-                }"
-            )
-        }
-    }
+        Text(text = log.event)
+        Text(
+            text = "Timestamp: ${
+                SimpleDateFormat(
+                    "HH:mm:ss",
+                    Locale.getDefault()
+                ).format(log.timestamp)
+            }"
+        )
+    }*/
 }
