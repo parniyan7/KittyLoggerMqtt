@@ -1,4 +1,4 @@
-package com.parniyan.kittylogger.data
+package com.parniyan.kittylogger.data.device
 
 import com.parniyan.kittylogger.ConsoleLogger
 import com.parniyan.kittylogger.KittyLoggerBuilder
