@@ -1,5 +1,6 @@
 package com.parniyan.kittylogger.data.device
 
+import android.content.Context
 import com.parniyan.kittylogger.ConsoleLogger
 import com.parniyan.kittylogger.KittyLoggerBuilder
 import com.parniyan.kittylogger.LogManager
@@ -13,15 +14,16 @@ import org.eclipse.paho.client.mqttv3.MqttAsyncClient
  **
  */
 
-class MqttManager {
+class MqttManager(private val context: Context, private val notificationHandler: NotificationHandler) {
     private var mqttClient: MqttAsyncClient? = null
 
     fun initMqttClient(url: String, clientId: String) {
         mqttClient = MqttAsyncClient(url, clientId, null).also { client ->
             val kittyLogger = ConsoleLogger()
+            val notificationHelper = NotificationHelper(context, notificationHandler) // Initialize
             val kittyMqttInterceptor = KittyLoggerBuilder()
                 .setLogger(kittyLogger)
-                .build(client) // Pass the client directly
+                .build(client, notificationHelper) // Pass the client directly
 
             client.setCallback(kittyMqttInterceptor)
         }

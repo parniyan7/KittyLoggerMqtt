@@ -1,4 +1,5 @@
 package com.parniyan.kittylogger
+import com.parniyan.kittylogger.data.device.NotificationHelper
 import com.parniyan.kittylogger.data.model.KittyLog
 import com.parniyan.kittylogger.data.model.LogType
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
@@ -17,7 +18,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage
 
 class KittyMqttInterceptor(
     private val mqttClient: MqttAsyncClient,
-    private val logger: KittyLogger = ConsoleLogger()
+    private val logger: KittyLogger = ConsoleLogger(),
+    private val notificationHelper: NotificationHelper
 ) : MqttCallback {
 
     init {
@@ -34,6 +36,8 @@ class KittyMqttInterceptor(
         LogManager.addLog(log)
         logger.logEvent(log.event)
 
+        // Send notification for the outgoing message
+        notificationHelper.sendNotification("Message Sent", "Topic: $topic, Payload: ${String(payload)}")
         mqttClient.publish(topic, payload, qos, retained)
     }
 
@@ -46,6 +50,8 @@ class KittyMqttInterceptor(
         )
         LogManager.addLog(log)
         logger.logEvent(log.event)
+        // Send notification for the incoming message
+        notificationHelper.sendNotification("New Message", "Topic: $topic, Message: ${String(message.payload)}")
     }
 
     // Handle connection loss

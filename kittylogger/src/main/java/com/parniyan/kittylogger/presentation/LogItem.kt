@@ -20,15 +20,13 @@ import java.util.Locale
 
 @Composable
 fun LogItem(log: KittyLog) {
-    /*val backgroundColor = when (log.type) {
+    val backgroundColor = when (log.type) {
         LogType.INCOMING -> Color.YELLOW
         LogType.OUTGOING -> Color.YELLOW
         LogType.CONNECTION_LOST -> Color.RED
         LogType.DELIVERY_COMPLETE -> Color.GREEN
-    }*/
-    Column {
     }
-   /* Column(
+    Column(
         modifier = Modifier.padding(16.dp)
     ) {
         Text(text = log.event)
@@ -40,5 +38,5 @@ fun LogItem(log: KittyLog) {
                 ).format(log.timestamp)
             }"
         )
-    }*/
+    }
 }

@@ -22,31 +22,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        // Create an instance of MqttManager
-        val mqttManager = MqttManager()
-
-        // Initialize the MQTT client
-        mqttManager.initMqttClient("tcp://broker.hivemq.com:1883", "YourClientId")
-
-        // Subscribe to a topic
-        try {
-            mqttManager.subscribeToTopic("my/topic", 1)
-        } catch (e: Exception) {
-            Log.e("MqttManager", "Subscription error: ${e.message}")
-        }
-
-        // Publish a message to the topic
-        try {
-            mqttManager.publishMessage("my/topic", "Hello, MQTT!")
-        } catch (e: Exception){
-
-        }
 
         setContent {
             KittyLoggerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     // Optionally, display logs in a UI component
-                    LogViewer(mqttManager, modifier = Modifier.padding(innerPadding))
+                    Column(Modifier.padding(innerPadding)) {
+
+                    }
                 }
             }
         }

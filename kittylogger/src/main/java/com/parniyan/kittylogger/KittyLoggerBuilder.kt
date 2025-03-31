@@ -1,5 +1,6 @@
 package com.parniyan.kittylogger
 
+import com.parniyan.kittylogger.data.device.NotificationHelper
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient
 
 
@@ -16,7 +17,7 @@ class KittyLoggerBuilder {
         return this
     }
 
-    fun build(mqttClient: MqttAsyncClient): KittyMqttInterceptor {
-        return KittyMqttInterceptor(mqttClient, logger)
+    fun build(mqttClient: MqttAsyncClient, notificationHelper: NotificationHelper): KittyMqttInterceptor {
+        return KittyMqttInterceptor(mqttClient, logger, notificationHelper)
     }
 }
