@@ -19,7 +19,7 @@ class KittyMqttClient(
     private val client: MqttAsyncClient,
     private val logger: KittyMqttLogger
 ) {
-    fun connect(options: MqttConnectOptions, callback: IMqttActionListener?) {
+    fun connectWithCallback(options: MqttConnectOptions, callback: IMqttActionListener?) {
         logger.onConnectAttempt(client.serverURI)
         client.connect(options, null, object : IMqttActionListener {
             override fun onSuccess(token: IMqttToken?) {
@@ -34,12 +34,12 @@ class KittyMqttClient(
         })
     }
 
-    fun publish(topic: String, payload: ByteArray, qos: Int, retained: Boolean, userContext: Any?, callback: IMqttActionListener?) {
+    fun publishMessage(topic: String, payload: ByteArray, qos: Int, retained: Boolean, userContext: Any?, callback: IMqttActionListener?) {
         logger.onMessagePublished(topic, String(payload))
         client.publish(topic, payload, qos, retained, userContext, callback)
     }
 
-    fun setCallback(callback: MqttCallback) {
+    fun registerCallback(callback: MqttCallback) {
         client.setCallback(object : MqttCallback {
             override fun messageArrived(topic: String?, message: MqttMessage?) {
                 topic?.let { logger.onMessageReceived(it, message?.toString() ?: "") }
@@ -59,23 +59,23 @@ class KittyMqttClient(
         })
     }
 
-    fun subscribe(topic: String, qos: Int, callback: IMqttActionListener? = null) {
+    fun subscribeToTopic(topic: String, qos: Int, callback: IMqttActionListener? = null) {
         logger.onSubscribe(topic)
         client.subscribe(topic, qos, null, callback)
     }
 
-    fun unsubscribe(topic: String, callback: IMqttActionListener? = null) {
+    fun unsubscribeFromTopic(topic: String, callback: IMqttActionListener? = null) {
         logger.onUnsubscribe(topic)
         client.unsubscribe(topic, null, callback)
     }
 
-    fun disconnect(callback: IMqttActionListener? = null) {
+    fun disconnectClient(callback: IMqttActionListener? = null) {
         logger.onDisconnect()
         client.disconnect(null, callback)
     }
 
-    fun isConnected(): Boolean = client.isConnected
+    fun isClientConnected(): Boolean = client.isConnected
 
-    fun getClient(): MqttAsyncClient = client
+    fun getRawClient(): MqttAsyncClient = client
 }
 
