@@ -59,13 +59,13 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 }
 
-publishing {
-    publications {
-        register<MavenPublication>("release") {
-            groupId = "com.parniyan.kittylogger"
-            artifactId = "kittylogger"
-            version = "1.0.0"
-            afterEvaluate {
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                groupId = "com.parniyan.kittylogger"
+                artifactId = "kittylogger"
+                version = "1.0.5"
                 from(components["release"])
             }
         }
