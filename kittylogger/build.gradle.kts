@@ -62,12 +62,13 @@ dependencies {
 afterEvaluate {
     publishing {
         publications {
-            register<MavenPublication>("release") {
+            create<MavenPublication>("release") {
                 groupId = "com.parniyan.kittylogger"
                 artifactId = "kittylogger"
-                version = "1.0.5"
-                from(components["release"])
+                version = "1.0.7"
+                from(components.findByName("release"))
             }
         }
     }
 }
+
