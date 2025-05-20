@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.parniyan.kittylogger"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -65,7 +65,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.parniyan.kittylogger"
                 artifactId = "kittylogger"
-                version = "1.0.9"
+                version = "1.0.10"
                 from(components.findByName("release"))
             }
         }
