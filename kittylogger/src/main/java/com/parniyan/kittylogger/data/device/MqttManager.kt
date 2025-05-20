@@ -1,9 +1,6 @@
 package com.parniyan.kittylogger.data.device
 
 import android.content.Context
-import com.parniyan.kittylogger.ConsoleLogger
-import com.parniyan.kittylogger.KittyLoggerBuilder
-import com.parniyan.kittylogger.LogManager
 import com.parniyan.kittylogger.data.model.KittyLog
 import com.parniyan.kittylogger.data.model.LogType
 import org.eclipse.paho.client.mqttv3.MqttAsyncClient
