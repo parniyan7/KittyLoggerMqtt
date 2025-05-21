@@ -30,7 +30,7 @@ object KittyLoggerUI {
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(androidx.core.R.drawable.notification_bg) // <- provide this drawable in your lib
+            .setSmallIcon(R.drawable.kitty_logo) // <- provide this drawable in your lib
             .setContentTitle("KittyLogger")
             .setContentText("Tap to view MQTT logs")
             .setContentIntent(pendingIntent)
