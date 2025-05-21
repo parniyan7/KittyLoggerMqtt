@@ -20,7 +20,11 @@ class KittyMqttLogActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            KittyMqttLogScreen()
+            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                KittyMqttLogScreen(
+                    modifier = Modifier.padding(innerPadding)
+                )
+            }
         }
     }
 }

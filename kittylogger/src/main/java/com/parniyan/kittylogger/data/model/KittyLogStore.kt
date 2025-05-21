@@ -10,7 +10,7 @@ object KittyMqttLogStore {
     private val logs = mutableListOf<KittyLogItem>()
 
     fun addLog(log: KittyLogItem) {
-        logs.add(0, log) // prepend so newest logs appear first
+        logs.add(0, log) // newest first
     }
 
     fun getLogs(): List<KittyLogItem> = logs.toList()

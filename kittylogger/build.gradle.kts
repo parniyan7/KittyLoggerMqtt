@@ -65,7 +65,7 @@ afterEvaluate {
             create<MavenPublication>("release") {
                 groupId = "com.parniyan.kittylogger"
                 artifactId = "kittylogger"
-                version = "1.0.11"
+                version = "1.0.12"
                 from(components.findByName("release"))
             }
         }

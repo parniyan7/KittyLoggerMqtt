@@ -7,8 +7,8 @@ package com.parniyan.kittylogger.data.model
  */
 
 data class KittyLogItem(
-    val type: String,         // e.g., "publish", "subscribe", "ack"
-    val topic: String,        // topic name
-    val payload: String = "", // optional payload
-    val timestamp: Long = System.currentTimeMillis() // for UI sorting
+    val type: String, // e.g., "publish", "subscribe", "ack", "message"
+    val topic: String,
+    val payload: String,
+    val timestamp: Long = System.currentTimeMillis()
 )
