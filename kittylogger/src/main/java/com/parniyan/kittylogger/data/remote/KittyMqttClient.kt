@@ -1,6 +1,5 @@
 package com.parniyan.kittylogger.data.remote
 
-import com.parniyan.kittylogger.data.KittyMqttLogger
 import org.eclipse.paho.client.mqttv3.IMqttActionListener
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken
 import org.eclipse.paho.client.mqttv3.IMqttToken
