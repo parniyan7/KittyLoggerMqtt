@@ -54,7 +54,7 @@ fun KittyMqttLogScreen(modifier: Modifier) {
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            items(items = logs, key = { it.timestamp }) { log ->
+            items(items = logs) { log ->
                 KittyLogCard(log)
             }
         }
