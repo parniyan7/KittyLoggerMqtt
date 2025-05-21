@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.parniyan.kittylogger.R
+import com.parniyan.kittylogger.presentation.theme.KittyLoggerTheme
 
 class KittyMqttLogActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,10 +21,12 @@ class KittyMqttLogActivity : ComponentActivity() {
         enableEdgeToEdge()
 
         setContent {
-            Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                KittyMqttLogScreen(
-                    modifier = Modifier.padding(innerPadding)
-                )
+            KittyLoggerTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    KittyMqttLogScreen(
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }
