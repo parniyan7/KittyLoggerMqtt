@@ -68,19 +68,20 @@ fun KittyLogCard(log: KittyLogItem) {
             .padding(vertical = 4.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Column(
-            modifier = Modifier
-                .padding(12.dp)
-                .verticalScroll(rememberScrollState())
-        ) {
+        Column(modifier = Modifier.padding(12.dp)) {
             Text("Type: ${log.type}", style = MaterialTheme.typography.titleSmall, color = Color(0xFF1E88E5))
             Spacer(Modifier.height(4.dp))
             Text("Topic: ${log.topic}", style = MaterialTheme.typography.bodyMedium, color = Color(0xFF43A047))
             Spacer(Modifier.height(4.dp))
             Text("Payload:", style = MaterialTheme.typography.labelMedium, color = Color(0xFFF4511E))
-            Text(log.payload, style = MaterialTheme.typography.bodySmall, color = Color.DarkGray)
+            Text(
+                log.payload,
+                style = MaterialTheme.typography.bodySmall,
+                color = Color.DarkGray
+            )
             Spacer(Modifier.height(4.dp))
             Text("Time: $timeFormatted", style = MaterialTheme.typography.labelSmall, color = Color.Gray)
         }
     }
 }
+
