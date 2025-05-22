@@ -1,7 +1,7 @@
 package com.parniyan.kittylogger.data.remote
 
-import com.parniyan.kittylogger.data.model.KittyMqttLogStore
 import com.parniyan.kittylogger.data.model.KittyLogItem
+import com.parniyan.kittylogger.data.model.KittyMqttLogStore
 
 
 /**
@@ -11,13 +11,9 @@ import com.parniyan.kittylogger.data.model.KittyLogItem
 
 class ConsoleKittyMqttLogger : KittyMqttLogger {
     private fun log(type: String, topic: String, payload: String = "") {
-        val log = KittyLogItem(
-            type = type,
-            topic = topic,
-            payload = payload
-        )
+        val log = KittyLogItem(type = type, topic = topic, payload = payload)
         KittyMqttLogStore.addLog(log)
-        println("[KittyLogger][$type] $topic ${if (payload.isNotBlank()) "-> $payload" else ""}")
+        println("[KittyLogger][$type] $topic${if (payload.isNotBlank()) " -> $payload" else ""}")
     }
 
     override fun onConnectAttempt(brokerUrl: String) = log("connect-attempt", brokerUrl)
