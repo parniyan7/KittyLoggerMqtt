@@ -17,10 +17,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -46,13 +46,21 @@ fun KittyMqttLogScreen(modifier: Modifier) {
         TopAppBar(
             modifier = Modifier.padding(top = 16.dp),
             title = {
-                Row {
-                    Icon(painter = painterResource(id = R.drawable.kitty_logo), contentDescription = null)
+                Row(
+                    modifier = Modifier
+                        .padding(top = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.kitty_logo),
+                        contentDescription = null
+                    )
                     Text(
                         modifier = Modifier.padding(start = 10.dp),
-                        text = "Mqtt Logger", style = MaterialTheme.typography.headlineSmall, color = Color(
-                            0xFFC1ADE6
-                        ))
+                        text = "Kitty Mqtt Interceptor",
+                        style = MaterialTheme.typography.headlineSmall,
+                        color = Color(0xFFC1ADE6)
+                    )
                 }
             })
     }) {
