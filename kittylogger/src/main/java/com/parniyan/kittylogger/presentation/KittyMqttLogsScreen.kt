@@ -10,15 +10,20 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,7 +45,13 @@ import java.util.Locale
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun KittyMqttLogScreen(modifier: Modifier) {
-    val logs = remember { KittyMqttLogStore.getLogs() }
+    val logs = remember { mutableStateListOf<KittyLogItem>() }
+
+    LaunchedEffect(Unit) {
+        logs.clear()
+        logs.addAll(KittyMqttLogStore.getLogs())
+    }
+
 
     Scaffold(topBar = {
         TopAppBar(
@@ -62,6 +73,14 @@ fun KittyMqttLogScreen(modifier: Modifier) {
                         color = Color(0xFFC1ADE6)
                     )
                 }
+            },
+            actions = {
+                IconButton(onClick = {
+                    KittyMqttLogStore.clear()
+                    logs.clear()
+                }) {
+                    Icon(Icons.Default.Delete, contentDescription = "Clear Logs")
+                }
             })
     }) {
         LazyColumn(
@@ -70,7 +89,7 @@ fun KittyMqttLogScreen(modifier: Modifier) {
                 .padding(16.dp)
                 .fillMaxSize()
         ) {
-            items(items = logs) { log ->
+            items(items = logs.reversed()) { log ->
                 KittyLogCard(log)
             }
         }

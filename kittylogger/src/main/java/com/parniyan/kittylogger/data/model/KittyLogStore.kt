@@ -13,7 +13,7 @@ object KittyMqttLogStore {
 
     fun addLog(log: KittyLogItem) {
         logs.add(0, log)
-        KittyLoggerUI.showNotification() // automatically update notifications
+        KittyLoggerUI.showNotification()
     }
 
     fun getLogs(): List<KittyLogItem> = logs.toList()
